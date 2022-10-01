@@ -69,12 +69,6 @@ public class Week01 {
 				JOptionPane.showMessageDialog(null, errorMessage);
 			}
 			break;
-		case 7:
-			example_w17(args);
-			break;
-		case 8:
-			example_w18(args);
-			break;
 		default: // invalid lab
 			errorMessage = "No valid Lab " + lab + " for week 1";
 			JOptionPane.showMessageDialog(null, errorMessage);
