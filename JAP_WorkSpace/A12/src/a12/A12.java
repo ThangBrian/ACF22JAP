@@ -806,6 +806,7 @@ public class A12 extends Application {
 	  
 	  /**
 	   * The menus at the top of the application
+	   * @return horizontalBox - box that contains menus
 	   */
 	  public HBox getMenu() {
 		  	/*
