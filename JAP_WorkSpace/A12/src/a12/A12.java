@@ -1,7 +1,5 @@
 package a12;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.Timer; 
 import java.util.TimerTask;
 
@@ -321,7 +319,6 @@ public class A12 extends Application {
 		    	       				time.cancel();
 		    	       				wonDialog.show();
 		    	       			}
-
 			    	       			try {
 			    	       				start(getPrimaryStage());
 			    	       			}
@@ -330,6 +327,7 @@ public class A12 extends Application {
 			    	       			}
 		    	       			
 		    	       		}
+		    	       		break;
 		    	       	}
 		    	        	
 		    	      }  				
@@ -371,8 +369,8 @@ public class A12 extends Application {
   		 */
   		public splashWindow(){
   			try {
-	        	aboutImage = new Image(new FileInputStream("C:\\Users\\tranq\\OneDrive\\Semester 4\\JAP\\JAP_WorkSpace\\A12\\src\\images\\gameabout.png"));
-			} catch (FileNotFoundException e) {
+	        	aboutImage = new Image(getClass().getResourceAsStream("/images/gameabout.png"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
@@ -502,64 +500,65 @@ public class A12 extends Application {
 	         * Load images
 	         */
 	        try {
-	        	gameLogo = new Image(new FileInputStream("C:\\Users\\tranq\\OneDrive\\Semester 4\\JAP\\JAP_WorkSpace\\A12\\src\\images\\gamelogo.png"));
-			} catch (FileNotFoundException e) {
+//	        	gameLogo = new Image(new FileInputStream("src/images/gamelogo.png"));
+	        	gameLogo = new Image(getClass().getResourceAsStream("/images/gamelogo.png"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}; 
 	        
 	        try {
-	        	aboutImage = new Image(new FileInputStream("C:\\Users\\tranq\\OneDrive\\Semester 4\\JAP\\JAP_WorkSpace\\A12\\src\\images\\game.png"));
-			} catch (FileNotFoundException e) {
+	        	aboutImage = new Image(getClass().getResourceAsStream("/images/game.png"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 	        
 	        try {
-	        	newImage = new Image(new FileInputStream("C:\\Users\\tranq\\OneDrive\\Semester 4\\JAP\\JAP_WorkSpace\\A12\\src\\images\\iconnew.png"));
-			} catch (FileNotFoundException e) {
+	        	newImage = new Image(getClass().getResourceAsStream("/images/iconnew.png"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 	        
 	        try {
-	        	solutionImage = new Image(new FileInputStream("C:\\Users\\tranq\\OneDrive\\Semester 4\\JAP\\JAP_WorkSpace\\A12\\src\\images\\iconsol.png"));
-			} catch (FileNotFoundException e) {
+	        	solutionImage = new Image(getClass().getResourceAsStream("/images/iconsol.png"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 	        
 	        try {
-	        	exitImage = new Image(new FileInputStream("C:\\Users\\tranq\\OneDrive\\Semester 4\\JAP\\JAP_WorkSpace\\A12\\src\\images\\iconext.png"));
-			} catch (FileNotFoundException e) {
+	        	exitImage = new Image(getClass().getResourceAsStream("/images/iconext.png"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 	        
 	        try {
-	        	aboutIcon = new Image(new FileInputStream("C:\\Users\\tranq\\OneDrive\\Semester 4\\JAP\\JAP_WorkSpace\\A12\\src\\images\\iconabt.png"));
-			} catch (FileNotFoundException e) {
+	        	aboutIcon = new Image(getClass().getResourceAsStream("/images/iconabt.png"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 	        
 	        try {
-	        	finishedImage = new Image(new FileInputStream("C:\\Users\\tranq\\OneDrive\\Semester 4\\JAP\\JAP_WorkSpace\\A12\\src\\images\\gameend.png"));
-			} catch (FileNotFoundException e) {
+	        	finishedImage = new Image(getClass().getResourceAsStream("/images/gameend.png"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 	        
 	        try {
-	        	errorImage = new Image(new FileInputStream("C:\\Users\\tranq\\OneDrive\\Semester 4\\JAP\\JAP_WorkSpace\\A12\\src\\images\\gameerr.png"));
-			} catch (FileNotFoundException e) {
+	        	errorImage = new Image(getClass().getResourceAsStream("/images/gameerr.png"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	       
 	        
 	        try {
-	        	wonImage = new Image(new FileInputStream("C:\\Users\\tranq\\OneDrive\\Semester 4\\JAP\\JAP_WorkSpace\\A12\\src\\images\\gamewinner.png"));
-			} catch (FileNotFoundException e) {
+	        	wonImage = new Image(getClass().getResourceAsStream("/images/gamewinner.png"));
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	  
@@ -642,7 +641,7 @@ public class A12 extends Application {
 	        design.setToggleGroup(group);
 	        play.setToggleGroup(group);
 	        design.addEventHandler(ActionEvent.ACTION, control.eventHandler);
-	        play.addEventFilter(ActionEvent.ACTION, control.eventHandler);
+	        play.addEventHandler(ActionEvent.ACTION, control.eventHandler);
 	        
 	        /*
 	         * Disable tiles if mode is design
@@ -665,7 +664,7 @@ public class A12 extends Application {
 	        /*
 	         * Enable buttons if mode is play
 	         */
-	        if(instance.getMode().equalsIgnoreCase("play")) {
+	        if(instance.getMode().equalsIgnoreCase("play") && instance.isWon() == false) {
 	        	play.setSelected(true);
 				for(int i=0; i<buttonArr.length; i++) {
 	            	for(int j=0; j<buttonArr[0].length; j++) {
@@ -682,8 +681,15 @@ public class A12 extends Application {
 	        /*
 	         * Disable finish button if the user won
 	         */
-	        if(instance.isWon())
+	        if(instance.isWon()) {
 	        	finish.setDisable(true);
+	        	for(int i=0; i<buttonArr.length; i++) {
+	            	for(int j=0; j<buttonArr[0].length; j++) {
+	            		if(buttonArr[i][j] != null )
+	            			buttonArr[i][j].setDisable(true);
+	            	}
+	            }
+	        }
 	        /*
 	         * Configure dim label
 	         */
