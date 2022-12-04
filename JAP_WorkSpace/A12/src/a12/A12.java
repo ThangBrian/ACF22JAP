@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ColorPicker;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
@@ -45,14 +46,17 @@ import Model.Data;
  */
 
 public class A12 extends Application {
-    private int seconds = 0; // For the timer
+    public int seconds = 0; // For the timer
     Timer time;
     TimerTask timerTask;
     final ColorPicker colorPicker = new ColorPicker(Color.web("#80ff00"));   
     public Data instance = new Data();
-    private Stage primaryStage;
+    public static boolean show = false;
+    static public Stage primaryStage;
 	
 	Button[][] buttonArr;
+	
+	public A12 () {}
 	
 	/*
 	 * images
@@ -171,7 +175,7 @@ public class A12 extends Application {
      * @param primaryStage - primary stage
      */
     public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+        A12.primaryStage = primaryStage;
     }
     
     /**
@@ -199,6 +203,14 @@ public class A12 extends Application {
   	 * Inner Controller Class
   	 */
   	public class Controller{	
+  		EventHandler<WindowEvent> windowHandler = new EventHandler<WindowEvent>() {
+
+			@Override
+			public void handle(WindowEvent event) {
+				instance.setFinished(true);	
+			}
+  		
+  		};
   		EventHandler<ActionEvent> eventHandler = new EventHandler<ActionEvent>() {
 			@Override
 			/**
@@ -259,7 +271,8 @@ public class A12 extends Application {
 		            		if(buttonArr[i][j] != null )
 		            			buttonArr[i][j].setDisable(true);
 		            	}
-		            }					
+		            }		
+		        	instance.setFinished(true);
 				}				
 				else if(event.getSource() == design || event.getSource() == newOption || event.getSource() == solutionOption) { // user choose design mode or create a new game or show the solution
 					instance.setMode("design");
@@ -875,6 +888,7 @@ public class A12 extends Application {
 		primaryStage.setScene(scene);
 		if(instance.isShowed())
 			primaryStage.show();
+  		primaryStage.setOnCloseRequest(control.windowHandler);
 	}
 	
 	/**

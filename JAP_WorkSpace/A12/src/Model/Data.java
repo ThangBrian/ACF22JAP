@@ -19,6 +19,7 @@ public class Data {
     private boolean won = false;		// If the user wins
     private boolean showed = false;		// If the splash window is showed
     private boolean inputGiven = true;	// If input (for text type) is given
+    private boolean finished = false;
     private int[][] solution;			// Array for the solution
     private int[][] play;				// Array for the play mode
     private int[][] color;				// Array for colors of tiles			
@@ -300,6 +301,11 @@ public class Data {
     public String getType() {
     	return type;
     }
+    
+    public int[][] getSolution(){
+    	return solution;
+    }
+    
     /**
      * Set the solution got from user
      * @param input - the text input got from user
@@ -509,5 +515,13 @@ public class Data {
 	 */
 	public void setShowed(boolean showed) {
 		this.showed = showed;
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
 	}
 }

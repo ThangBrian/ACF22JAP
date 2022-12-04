@@ -14,4 +14,16 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/images/clientImage.png</name>
+			<type>1</type>
+			<location>C:/Users/tranq/OneDrive/Semester 4/JAP/JAP_WorkSpace/A12/src/images/clientImage.png</location>
+		</link>
+		<link>
+			<name>src/images/serverImage.png</name>
+			<type>1</type>
+			<location>C:/Users/tranq/OneDrive/Semester 4/JAP/JAP_WorkSpace/A12/src/images/serverImage.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>
